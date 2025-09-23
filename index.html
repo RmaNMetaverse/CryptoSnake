@@ -36,9 +36,10 @@
             <span id="status-text">Connecting to Blockchain...</span>
         </div>
         <div class="button-group">
-             <button id="leaderboard-btn">Local Leaderboard 🏆</button>
+             <button id="leaderboard-btn">Leaderboard 🏆</button>
             <button id="donate-btn">Donate ❤️</button>
         </div>
+
         <div class="button-group">
 
             <!-- Default gnrcounter.com code for https://rmanmetaverse.github.io/CryptoSnake/ -->
@@ -48,10 +49,10 @@
             </noscript>
             <!-- End of gnrcounter.com Code -->  
             
-        </div>
+
+
+
     </div>
-
-
 
     <div id="game-over-modal" class="modal">
         <div class="modal-content">
@@ -59,11 +60,14 @@
             <div id="final-score" class="stat-value"></div>
             <p>Enter your name to save your score:</p>
             <input type="text" id="player-name" placeholder="Your Name" maxlength="15">
-            <button id="submit-score-btn">Submit & Restart</button>
+            <div class="modal-button-group">
+                <button id="submit-score-btn">Submit Score & Restart</button>
+                <button id="restart-btn" class="secondary" style="margin: 8px;">Just Restart</button>
+            </div>
         </div>
     </div>
 
-     <!-- Leaderboard Modal -->
+    <!-- Leaderboard Modal -->
     <div id="leaderboard-modal" class="modal">
         <div class="modal-content">
             <span id="close-leaderboard-modal" class="close-btn">&times;</span>
@@ -97,4 +101,5 @@
     <script src="script.js"></script>
 </body>
 </html>
+
 

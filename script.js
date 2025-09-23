@@ -12,6 +12,7 @@ const gameOverModal = document.getElementById('game-over-modal');
 const finalScoreEl = document.getElementById('final-score');
 const playerNameInput = document.getElementById('player-name');
 const submitScoreBtn = document.getElementById('submit-score-btn');
+const restartBtn = document.getElementById('restart-btn'); // New button
 
 // Donate Modal Elements
 const donateBtn = document.getElementById('donate-btn');
@@ -32,8 +33,6 @@ const leaderboardModal = document.getElementById('leaderboard-modal');
 const closeLeaderboardModal = document.getElementById('close-leaderboard-modal');
 const leaderboardList = document.getElementById('leaderboard-list');
 
-// Visitor Counter Element
-const playerCountEl = document.getElementById('player-count');
 
 
 // --- Constants ---
@@ -106,7 +105,6 @@ setInterval(() => {
 // --- Init and Game Loop ---
 document.addEventListener('DOMContentLoaded', () => {
     init();
-    updateVisitorCount();
 });
 
 
@@ -299,6 +297,11 @@ function handleSwipe(startX, startY, endX, endY) {
 
 // --- UI / Modal Logic ---
 
+
+
+
+// Event listener for the new restart button
+restartBtn.addEventListener('click', init);
 
 // Leaderboard
 leaderboardBtn.addEventListener('click', showLeaderboard);
