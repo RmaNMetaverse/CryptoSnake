@@ -290,7 +290,18 @@ h1 {
     padding: 10px;
     border-radius: 6px;
     margin: 10px auto;
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+    text-align: center;
+}
+
+#qrcode-canvas canvas,
+#qrcode-canvas img {
+    border-radius: 4px;
+    max-width: 100%;
+    height: auto;
 }
 
 #qrcode-address-text {

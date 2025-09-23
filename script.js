@@ -396,13 +396,40 @@ function copyAddress(address, button) {
 }
 
 function showQrCode(name, address) {
-    const qr = qrcode(0, 'L');
-    qr.addData(address);
-    qr.make();
-    
-    qrcodeCanvas.innerHTML = qr.createImgTag(5, 10);
-    qrcodeCryptoName.textContent = name;
-    qrcodeAddressText.textContent = address;
-    qrcodeModal.style.display = 'flex';
+    try {
+        // Clear any existing content
+        qrcodeCanvas.innerHTML = '';
+        
+        // Check if qrcode function is available
+        if (typeof qrcode === 'undefined') {
+            console.error('QR code library not loaded');
+            qrcodeCanvas.innerHTML = '<p style="color: #e55353;">QR code library not loaded</p>';
+            qrcodeCryptoName.textContent = name;
+            qrcodeAddressText.textContent = address;
+            qrcodeModal.style.display = 'flex';
+            return;
+        }
+        
+        // Generate QR code using the qrcode-generator library
+        const qr = qrcode(0, 'M'); // Error correction level M (Medium)
+        qr.addData(address);
+        qr.make();
+        
+        // Create an image element with the QR code
+        const qrImg = qr.createImgTag(4, 10); // Size 4, margin 10
+        qrcodeCanvas.innerHTML = qrImg;
+        
+        qrcodeCryptoName.textContent = name;
+        qrcodeAddressText.textContent = address;
+        qrcodeModal.style.display = 'flex';
+        
+        console.log('QR code generated successfully for:', name);
+    } catch (error) {
+        console.error('QR Code generation error:', error);
+        qrcodeCanvas.innerHTML = '<p style="color: #e55353;">Failed to generate QR code: ' + error.message + '</p>';
+        qrcodeCryptoName.textContent = name;
+        qrcodeAddressText.textContent = address;
+        qrcodeModal.style.display = 'flex';
+    }
 }
 
