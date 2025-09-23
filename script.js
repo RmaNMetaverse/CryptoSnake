@@ -299,26 +299,6 @@ function handleSwipe(startX, startY, endX, endY) {
 
 // --- UI / Modal Logic ---
 
-function updateVisitorCount() {
-    const namespace = 'cryptosnake-github-page'; // Unique ID for your counter
-    const key = 'player-visits';
-    const apiUrl = `https://api.countapi.xyz/hit/${namespace}/${key}`;
-
-    fetch(apiUrl)
-        .then(res => res.json())
-        .then(data => {
-            if (playerCountEl) {
-                playerCountEl.textContent = data.value.toLocaleString();
-            }
-        })
-        .catch(error => {
-            console.error("Could not fetch player count:", error);
-            if (playerCountEl) {
-                playerCountEl.textContent = 'N/A';
-            }
-        });
-}
-
 
 // Leaderboard
 leaderboardBtn.addEventListener('click', showLeaderboard);
