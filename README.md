@@ -1,29 +1,40 @@
-Crypto Snake
-A classic snake game with a volatile twist! The speed of the snake is directly tied to the real-time transaction per second (TPS) rate of the Bitcoin blockchain. As the network gets busier, the game gets faster, creating an unpredictable and challenging experience.
+# **🐍 Crypto Snake ₿**
 
-How to Play
-The goal is to grow your snake as long as possible without running into the walls or your own tail.
+A classic snake game with a volatile crypto twist\! The snake's speed is directly tied to the real-time transaction rate of the Bitcoin network, making for unpredictable and challenging gameplay.
 
-Desktop: Use the Arrow Keys to change the snake's direction.
+## **✨ Features**
 
-Mobile: Swipe up, down, left, or right to control the snake.
+* **Dynamic Speed:** The game connects to a live WebSocket feed from the Bitcoin blockchain. The snake's speed instantly multiplies based on the current transactions per second (TPS).  
+* **Classic Gameplay:** The simple, addictive fun of the original snake game. Eat the Bitcoin symbols to grow longer.  
+* **Unpredictable Challenge:** High network activity means a faster snake\! Adapt to sudden changes in speed to survive.  
+* **Responsive Controls:**  
+  * ⌨️ **Desktop:** Use the **Arrow Keys** to control the snake.  
+  * 📱 **Mobile:** **Swipe** anywhere on the screen to change direction.  
+* **Live Connection Status:** A visual indicator shows your live connection status to the Bitcoin network.
 
-Eat the Bitcoin symbols (₿) to score points and make your snake grow longer. Keep an eye on the Speed Multiplier—it's based on live network data and can change at any moment!
+## **🚀 How to Play**
 
-Features
-Live Blockchain Data: Connects to a live WebSocket to monitor real-time Bitcoin transactions.
+1. **Visit the game link:** [https://your-username.github.io/crypto-snake/](https://www.google.com/search?q=https://your-username.github.io/crypto-snake/) (*Replace with your actual GitHub Pages link after deploying*)  
+2. Use the **Arrow Keys** or **Swipe** on your screen to make the first move.  
+3. Eat the Bitcoin (**₿**) symbols to grow your snake and increase your score.  
+4. Avoid running into the walls or your own tail.  
+5. Watch the "BTC TPS" and "Speed Multiplier" to anticipate how fast your snake will move\!
 
-Dynamic Difficulty: The snake's speed is multiplied by the current BTC TPS, making the game's pace unpredictable.
+## **🛠️ Tech Stack**
 
-Classic Gameplay: Simple and addictive mechanics of the original snake game.
+* **Frontend:** Plain HTML, CSS, and JavaScript.  
+* **Real-time Data:** WebSocket API from blockchain.info for live, unconfirmed Bitcoin transactions.  
+* **QR Code Generation:** qrcode.min.js library.
 
-Responsive Design: Fully playable on both desktop and mobile devices with keyboard and touch support.
+## **❤️ Support the Project**
 
-Technologies Used
-HTML5 Canvas
+If you enjoy the game, please consider supporting its development. Donations are greatly appreciated\!
 
-CSS3
+| Cryptocurrency | Address |
+| :---- | :---- |
+| **Bitcoin (BTC)** | bc1qh00necgrdynp09qvp4zh53eatrtvzxv0zmvutc |
+| **USDT (TRC-20)** | TTC1H8gomqsozKdka1AeKEpeZYQntaSQZ5 |
+| **Bitcoin Cash (BCH)** | qppdwk3healmqlhdsahp0mz3xmlc990yk585uncym3 |
+| **TON** | UQBALuXahFuK9s6eqBH0p4YJR7SPEyy0oOnEpXPSGGJL556s |
+| **Tron (TRX)** | TTC1H8gomqsozKdka1AeKEpeZYQntaSQZ5 |
 
-Vanilla JavaScript
-
-Blockchain.com WebSocket API for live transaction data.
