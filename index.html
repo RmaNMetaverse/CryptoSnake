@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crypto Snake</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <!-- QR Code Library -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcode-generator/qrcode.min.js"></script>
 </head>
 <body>
     <div class="game-container">
@@ -27,25 +27,41 @@
             </div>
             <div class="stat">
                 <div class="stat-label">SPEED MULTIPLIER</div>
-                <div id="speed" class="stat-value">x1</div>
+                <div id="speed-multiplier" class="stat-value">x1.00</div>
             </div>
         </div>
-
         <canvas id="game-board" width="400" height="400"></canvas>
-        
-        <div class="connection-status">
-            <span id="status-indicator" class="connecting"></span>
+        <div id="connection-status" class="status-disconnected">
+            <span id="status-indicator"></span>
             <span id="status-text">Connecting to Blockchain...</span>
         </div>
-
-        <button id="donate-btn">Donate ❤️</button>
+        <div class="button-group">
+             <button id="leaderboard-btn">Leaderboard 🏆</button>
+            <button id="donate-btn">Donate ❤️</button>
+        </div>
+        <div id="visitor-counter">
+            Total Players Ever: <span id="player-count">Loading...</span>
+        </div>
     </div>
 
     <div id="game-over-modal" class="modal">
         <div class="modal-content">
             <h2>Game Over</h2>
-            <div id="final-score" class="stat-value" style="margin-bottom: 20px;"></div>
-            <button id="restart-btn">Restart</button>
+            <div id="final-score" class="stat-value"></div>
+            <p>Enter your name to save your score:</p>
+            <input type="text" id="player-name" placeholder="Your Name" maxlength="15">
+            <button id="submit-score-btn">Submit & Restart</button>
+        </div>
+    </div>
+
+     <!-- Leaderboard Modal -->
+    <div id="leaderboard-modal" class="modal">
+        <div class="modal-content">
+            <span id="close-leaderboard-modal" class="close-btn">&times;</span>
+            <h2>Local Leaderboard</h2>
+            <ol id="leaderboard-list">
+                <!-- Scores will be populated by script.js -->
+            </ol>
         </div>
     </div>
 
@@ -54,16 +70,14 @@
         <div class="modal-content">
             <span id="close-donate-modal" class="close-btn">&times;</span>
             <h2>Support the Game</h2>
-            <p>Donations help keep the project alive. Thank you!</p>
-            <div id="address-list">
-                <!-- Crypto addresses will be populated by script.js -->
-            </div>
+            <p>Donations are greatly appreciated!</p>
+            <div id="address-list"></div>
         </div>
     </div>
-
+    
     <!-- QR Code Modal -->
     <div id="qrcode-modal" class="modal">
-        <div class="modal-content qr-content">
+        <div class="modal-content">
             <span id="close-qrcode-modal" class="close-btn">&times;</span>
             <h3 id="qrcode-crypto-name"></h3>
             <canvas id="qrcode-canvas"></canvas>
@@ -71,9 +85,7 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.4.4/build/qrcode.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
-
 
