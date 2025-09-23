@@ -1,0 +1,15 @@
+#IDE and editor directories
+.vscode/
+.idea/
+
+#Operating System files
+.DS_Store
+Thumbs.db
+
+#Dependency directories
+#Although this project has no dependencies, it's good practice to include this.
+node_modules/
+
+#Build output
+dist/
+build/

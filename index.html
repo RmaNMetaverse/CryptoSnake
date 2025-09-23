@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Crypto Snake</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1>Crypto Snake</h1>
+
+        <div class="stats-container">
+            <div class="stat">
+                <div class="stat-label">SCORE</div>
+                <div id="score" class="stat-value">0</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">BTC TPS</div>
+                <div id="tps" class="stat-value">0</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">SPEED MULTIPLIER</div>
+                <div id="speed" class="stat-value">x1</div>
+            </div>
+        </div>
+
+        <canvas id="game-board" width="400" height="400"></canvas>
+        
+        <div class="connection-status">
+            <span id="status-indicator" class="connecting"></span>
+            <span id="status-text">Connecting to Blockchain...</span>
+        </div>
+
+        <button id="donate-btn">Donate ❤️</button>
+    </div>
+
+    <div id="game-over-modal" class="modal">
+        <div class="modal-content">
+            <h2>Game Over</h2>
+            <div id="final-score" class="stat-value" style="margin-bottom: 20px;"></div>
+            <button id="restart-btn">Restart</button>
+        </div>
+    </div>
+
+    <!-- Donate Modal -->
+    <div id="donate-modal" class="modal">
+        <div class="modal-content">
+            <span id="close-donate-modal" class="close-btn">&times;</span>
+            <h2>Support the Game</h2>
+            <p>Donations help keep the project alive. Thank you!</p>
+            <div id="address-list">
+                <!-- Crypto addresses will be populated by script.js -->
+            </div>
+        </div>
+    </div>
+
+    <!-- QR Code Modal -->
+    <div id="qrcode-modal" class="modal">
+        <div class="modal-content qr-content">
+            <span id="close-qrcode-modal" class="close-btn">&times;</span>
+            <h3 id="qrcode-crypto-name"></h3>
+            <canvas id="qrcode-canvas"></canvas>
+            <p id="qrcode-address-text"></p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.4.4/build/qrcode.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+

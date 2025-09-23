@@ -1,0 +1,286 @@
+body {
+    background-color: #0d1117;
+    color: #c9d1d9;
+    font-family: 'VT323', monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-size: 1.2rem;
+    flex-direction: column;
+    overflow: hidden; /* Prevents scrollbars on mobile */
+}
+
+.game-container {
+    border: 2px solid #30363d;
+    border-radius: 8px;
+    padding: 20px;
+    background-color: #161b22;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.1);
+    text-align: center;
+    max-width: 90%;
+}
+
+h1 {
+    color: #58a6ff;
+    font-size: 3rem;
+    margin-bottom: 10px;
+    text-shadow: 0 0 5px #58a6ff;
+}
+
+.stats-container {
+    display: flex;
+    justify-content: space-around;
+    margin: 15px 0;
+    background: #0d1117;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #30363d;
+}
+
+.stat {
+    width: 30%;
+}
+
+.stat-label {
+    color: #8b949e;
+    font-size: 1rem;
+}
+
+.stat-value {
+    color: #f0b90b; /* Bitcoin gold */
+    font-size: 1.5rem;
+}
+
+#game-board {
+    background-color: #010409;
+    border: 1px solid #30363d;
+    border-radius: 4px;
+    max-width: 100%;
+    height: auto;
+}
+
+.connection-status {
+    margin-top: 10px;
+    font-size: 1rem;
+    height: 20px;
+}
+
+#status-indicator {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.connected {
+    background-color: #238636; /* Green */
+     box-shadow: 0 0 8px #238636;
+}
+
+.disconnected {
+    background-color: #da3633; /* Red */
+    box-shadow: 0 0 8px #da3633;
+}
+
+.connecting {
+    background-color: #dbab09; /* Yellow */
+    animation: pulse 1.5s infinite;
+     box-shadow: 0 0 8px #dbab09;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.4; }
+    100% { opacity: 1; }
+}
+
+/* --- Buttons & Modals --- */
+
+#restart-btn {
+    background-color: #f0b90b;
+    color: #0d1117;
+    border: none;
+    padding: 10px 20px;
+    font-family: 'VT323', monospace;
+    font-size: 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 0 10px rgba(240, 185, 11, 0.5);
+}
+
+#restart-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(240, 185, 11, 0.8);
+}
+
+#donate-btn {
+    background-color: transparent;
+    color: #58a6ff;
+    border: 1px solid #58a6ff;
+    padding: 8px 16px;
+    margin-top: 15px;
+    font-family: 'VT323', monospace;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#donate-btn:hover {
+    background-color: #58a6ff;
+    color: #0d1117;
+}
+
+/* General Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #161b22;
+    margin: auto;
+    padding: 20px 30px;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.close-btn {
+    color: #8b949e;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: #c9d1d9;
+    text-decoration: none;
+}
+
+/* Game Over Modal Specifics */
+#game-over-modal .modal-content {
+    border-color: #f0b90b;
+}
+
+#game-over-modal h2 {
+    color: #f0b90b;
+}
+
+/* Donate Modal Specifics */
+#donate-modal h2, #qrcode-modal h3 {
+    color: #58a6ff;
+    margin-top: 0;
+}
+
+#donate-modal p {
+    color: #8b949e;
+    margin-bottom: 20px;
+}
+
+#address-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    text-align: left;
+}
+
+.crypto-entry {
+    background: #0d1117;
+    padding: 10px 15px;
+    border-radius: 6px;
+    border: 1px solid #30363d;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.crypto-info {
+    display: flex;
+    flex-direction: column;
+    word-break: break-all;
+    flex-grow: 1;
+}
+
+.crypto-name {
+    font-weight: bold;
+    color: #c9d1d9;
+    font-size: 1.1rem;
+}
+
+.crypto-address {
+    color: #8b949e;
+    font-size: 0.9rem;
+}
+
+.crypto-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.crypto-actions button {
+    background-color: #21262d;
+    color: #c9d1d9;
+    border: 1px solid #30363d;
+    padding: 5px 10px;
+    font-family: 'VT323', monospace;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.crypto-actions button:hover {
+    background-color: #30363d;
+}
+
+/* QR Code Modal Specifics */
+.qr-content {
+    padding: 30px;
+}
+
+#qrcode-canvas {
+    background-color: white;
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+#qrcode-address-text {
+    word-break: break-all;
+    font-size: 0.9rem;
+    color: #8b949e;
+    margin-top: 15px;
+}
+
