@@ -1,5 +1,5 @@
 body {
-    background-color: #010409;
+    background-color: #000000;
     color: #c9d1d9;
     font-family: 'Roboto Mono', monospace;
     display: flex;
@@ -14,7 +14,7 @@ body {
 
 /* Telegram Dark Theme */
 body.telegram-dark {
-    background-color: #17212b;
+    background-color: #000000;
     color: #ffffff;
 }
 
@@ -25,12 +25,12 @@ body.telegram-dark .game-container {
 
 /* Telegram Light Theme */
 body.telegram-light {
-    background-color: #ffffff;
-    color: #000000;
+    background-color: #000000;
+    color: #ffffff;
 }
 
 body.telegram-light .game-container {
-    background-color: #f8f9fa;
+    background-color: #03090e;
     border-color: #dee2e6;
     color: #000000;
 }
@@ -38,22 +38,21 @@ body.telegram-light .game-container {
 /* Mobile optimizations for Telegram */
 @media (max-width: 768px) {
     body {
-        padding: 5px;
+        padding: 0;
         align-items: flex-start;
-        padding-top: 20px;
+        padding-top: 10px;
     }
     
     .game-container {
         width: 100%;
-        max-width: 100%;
-        padding: 15px;
+        max-width: 340px;
+        padding: 10px;
         margin: 0;
     }
     
     #game-board {
-        width: 100%;
-        max-width: 400px;
-        height: auto;
+        width: 300px;
+        height: 300px;
     }
     
     .stats-container {
@@ -69,9 +68,10 @@ body.telegram-light .game-container {
 .game-container {
     border: 2px solid #30363d;
     border-radius: 10px;
-    padding: 20px;
+    padding: 12px;
     background-color: #0d1117;
     box-shadow: 0 0 20px rgba(88, 166, 255, 0.2);
+    max-width: 360px;
 }
 
 h1 {
@@ -126,6 +126,8 @@ h1 {
 #game-board {
     background-color: #161b22;
     border: 1px solid #30363d;
+    width: 320px;
+    height: 320px;
 }
 
 #connection-status {
