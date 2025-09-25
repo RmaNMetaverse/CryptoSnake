@@ -5,65 +5,9 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    height: 100vh;
     margin: 0;
     text-align: center;
-    padding: 10px;
-    box-sizing: border-box;
-}
-
-/* Telegram Dark Theme */
-body.telegram-dark {
-    background-color: #17212b;
-    color: #ffffff;
-}
-
-body.telegram-dark .game-container {
-    background-color: #2b5278;
-    border-color: #4a9eff;
-}
-
-/* Telegram Light Theme */
-body.telegram-light {
-    background-color: #ffffff;
-    color: #000000;
-}
-
-body.telegram-light .game-container {
-    background-color: #f8f9fa;
-    border-color: #dee2e6;
-    color: #000000;
-}
-
-/* Mobile optimizations for Telegram */
-@media (max-width: 768px) {
-    body {
-        padding: 5px;
-        align-items: flex-start;
-        padding-top: 20px;
-    }
-    
-    .game-container {
-        width: 100%;
-        max-width: 100%;
-        padding: 15px;
-        margin: 0;
-    }
-    
-    #game-board {
-        width: 100%;
-        max-width: 400px;
-        height: auto;
-    }
-    
-    .stats-container {
-        flex-direction: column;
-        gap: 10px;
-    }
-    
-    .stat {
-        width: 100%;
-    }
 }
 
 .game-container {
@@ -176,7 +120,7 @@ h1 {
     text-align: center;
 }
 
-#donate-btn, #leaderboard-btn, #share-btn {
+#donate-btn, #leaderboard-btn {
     background-color: #21262d;
     color: #c9d1d9;
     border: 1px solid #30363d;
@@ -188,7 +132,7 @@ h1 {
     transition: background-color 0.2s;
 }
 
-#donate-btn:hover, #leaderboard-btn:hover, #share-btn:hover {
+#donate-btn:hover, #leaderboard-btn:hover {
     background-color: #30363d;
 }
 
