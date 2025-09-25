@@ -253,24 +253,24 @@ document.addEventListener('keydown', e => {
     // between game ticks, which can cause the snake to reverse on itself.
     if (changingDirection) return;
 
-    const key = e.key;
-    const isArrowKey = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(key);
+    const key = e.key.toLowerCase();
+    const isWASD = ["w", "a", "s", "d"].includes(key);
 
-    if (!isArrowKey) return;
+    if (!isWASD) return;
     
     changingDirection = true;
 
     switch (key) {
-        case 'ArrowUp':
+        case 'w':
             if (direction.y === 0) direction = { x: 0, y: -1 };
             break;
-        case 'ArrowDown':
+        case 's':
             if (direction.y === 0) direction = { x: 0, y: 1 };
             break;
-        case 'ArrowLeft':
+        case 'a':
             if (direction.x === 0) direction = { x: -1, y: 0 };
             break;
-        case 'ArrowRight':
+        case 'd':
             if (direction.x === 0) direction = { x: 1, y: 0 };
             break;
     }
@@ -336,13 +336,32 @@ closeLeaderboardModal.addEventListener('click', () => leaderboardModal.style.dis
 submitScoreBtn.addEventListener('click', saveScore);
 
 // Share button
-shareBtn.addEventListener('click', () => {
-    if (Telegram) {
-        const shareText = `🐍 Play Crypto Snake - Classic Snake Game with Bitcoin TPS Speed Multiplier! 🎮\n\nhttps://t.me/CryptoSnakeMiniGameBot?game=CryptoSnake`;
-        Telegram.sendData(JSON.stringify({
-            type: 'share_game',
-            text: shareText
-        }));
+shareBtn.addEventListener('click', async () => {
+    const gameUrl = 'https://t.me/CryptoSnakeMiniGameBot?game=CryptoSnakeMiniGame';
+    const shareText = `🐍 Play Crypto Snake - Classic Snake Game with Bitcoin TPS Speed Multiplier! 🎮\n\n${gameUrl}`;
+
+    // If inside Telegram, try to open a message composer to forward the link
+    if (Telegram && typeof Telegram.openTelegramLink === 'function') {
+        try {
+            Telegram.openTelegramLink(`https://t.me/share/url?url=${encodeURIComponent(gameUrl)}&text=${encodeURIComponent('Play Crypto Snake!')}`);
+            return;
+        } catch (_) {}
+    }
+
+    // Web Share API fallback
+    if (navigator.share) {
+        try {
+            await navigator.share({ title: 'Crypto Snake', text: 'Play Crypto Snake!', url: gameUrl });
+            return;
+        } catch (_) {}
+    }
+
+    // Clipboard fallback
+    try {
+        await navigator.clipboard.writeText(shareText);
+        alert('Link copied! Share it with your friends on Telegram.');
+    } catch (_) {
+        window.open(gameUrl, '_blank');
     }
 });
 
