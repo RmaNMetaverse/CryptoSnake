@@ -54,21 +54,12 @@ body.telegram-light .game-container {
         width: 300px;
         height: 300px;
     }
-    
-    .stats-container {
-        flex-direction: column;
-        gap: 10px;
-    }
-    
-    .stat {
-        width: 100%;
-    }
 }
 
 .game-container {
     border: 2px solid #30363d;
     border-radius: 10px;
-    padding: 12px;
+    padding: 10px; /* Reduced padding */
     background-color: #0d1117;
     box-shadow: 0 0 20px rgba(88, 166, 255, 0.2);
     max-width: 360px;
@@ -77,23 +68,24 @@ body.telegram-light .game-container {
 h1 {
     font-family: 'Press Start 2P', cursive;
     color: #58a6ff;
-    margin-bottom: 20px;
+    margin-bottom: 10px; /* Reduced margin */
     text-shadow: 0 0 5px #58a6ff;
+    font-size: 1.5rem; /* Reduced font size */
 }
 
 .controls-hint {
     color: #8b949e;
-    font-size: 1rem;
-    margin-bottom: 15px;
+    font-size: 0.8rem; /* Reduced font size */
+    margin-bottom: 10px; /* Reduced margin */
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 15px; /* Reduced gap */
     flex-wrap: wrap;
 }
 
 .controls-hint span {
     background-color: #0d1117;
-    padding: 5px 10px;
+    padding: 3px 8px; /* Reduced padding */
     border-radius: 5px;
     border: 1px solid #30363d;
 }
@@ -101,9 +93,9 @@ h1 {
 .stats-container {
     display: flex;
     justify-content: space-around;
-    margin: 15px 0;
+    margin: 10px 0; /* Reduced margin */
     background-color: #161b22;
-    padding: 10px;
+    padding: 8px; /* Reduced padding */
     border-radius: 6px;
     border: 1px solid #30363d;
 }
@@ -113,12 +105,12 @@ h1 {
 }
 
 .stat-label {
-    font-size: 0.7rem;
+    font-size: 0.6rem; /* Slightly reduced font size */
     color: #8b949e;
 }
 
 .stat-value {
-    font-size: 1.5rem;
+    font-size: 1.1rem; /* Reduced font size */
     font-weight: bold;
     color: #c9d1d9;
 }
@@ -370,4 +362,3 @@ h1 {
 .donate-title , .gameover-title {
     color: #e55353;
 }
-
