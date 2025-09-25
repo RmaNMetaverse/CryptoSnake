@@ -384,3 +384,36 @@ h1 {
     background-color: #2ea043;
 }
 
+/* New single restart button styling */
+.modal-button-group.single {
+    display: flex;
+    justify-content: center;
+}
+
+#restart-btn.primary-restart {
+    width: 100%;
+    padding: 14px 16px;
+    margin-top: 12px;
+    background-color: #238636;
+    color: #ffffff;
+    border: 1px solid #2ea043;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.05s ease-in-out;
+}
+
+#restart-btn.primary-restart:hover {
+    background-color: #2ea043;
+}
+
+#restart-btn.primary-restart:active {
+    transform: translateY(1px);
+}
+
+/* Donate title red */
+.donate-title {
+    color: #e55353;
+}
+

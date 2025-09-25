@@ -59,11 +59,8 @@
         <div class="modal-content">
             <h2>Game Over</h2>
             <div id="final-score" class="stat-value"></div>
-            <p>Enter your name to save your score:</p>
-            <input type="text" id="player-name" placeholder="Your Name" maxlength="15">
-            <div class="modal-button-group">
-                <button id="submit-score-btn">Submit Score & Restart</button>
-                <button id="restart-btn" class="secondary" style="margin: 8px;">Just Restart</button>
+            <div class="modal-button-group single">
+                <button id="restart-btn" class="primary-restart">Restart Game</button>
             </div>
         </div>
     </div>
@@ -74,7 +71,7 @@
     <div id="donate-modal" class="modal">
         <div class="modal-content">
             <span id="close-donate-modal" class="close-btn">&times;</span>
-            <h2>Support the Game</h2>
+            <h2 class="donate-title">Support the Game</h2>
             <p>Donations are greatly appreciated!</p>
             <div id="address-list"></div>
         </div>

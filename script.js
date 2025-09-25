@@ -10,9 +10,7 @@ const statusTextEl = document.getElementById('status-text');
 // Game Over Modal Elements
 const gameOverModal = document.getElementById('game-over-modal');
 const finalScoreEl = document.getElementById('final-score');
-const playerNameInput = document.getElementById('player-name');
-const submitScoreBtn = document.getElementById('submit-score-btn');
-const restartBtn = document.getElementById('restart-btn'); // New button
+const restartBtn = document.getElementById('restart-btn'); // Restart button
 
 // Donate Modal Elements
 const donateBtn = document.getElementById('donate-btn');
@@ -240,7 +238,7 @@ function onGameOver() {
     if(ws) ws.close(); // Close WebSocket connection
     finalScoreEl.textContent = `Score: ${score}`;
     gameOverModal.style.display = 'flex';
-    playerNameInput.focus();
+    restartBtn.focus();
 }
 
 // --- Input Handling ---
@@ -333,6 +331,8 @@ function handleSwipe(startX, startY, endX, endY) {
     }
 }
 
+
+
 // --- UI / Modal Logic ---
 
 
@@ -341,13 +341,6 @@ function handleSwipe(startX, startY, endX, endY) {
 // Event listener for the new restart button
 restartBtn.addEventListener('click', init);
 
-// Submit now just restarts the game (no leaderboard/sharing)
-submitScoreBtn.addEventListener('click', () => {
-    playerNameInput.value = '';
-    init();
-});
-
-// Share and leaderboard submission removed
 
 
 // Donations
