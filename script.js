@@ -27,19 +27,9 @@ const qrcodeCanvas = document.getElementById('qrcode-canvas');
 const qrcodeCryptoName = document.getElementById('qrcode-crypto-name');
 const qrcodeAddressText = document.getElementById('qrcode-address-text');
 
-// Leaderboard Modal Elements
-const leaderboardBtn = document.getElementById('leaderboard-btn');
-const leaderboardModal = document.getElementById('leaderboard-modal');
-const closeLeaderboardModal = document.getElementById('close-leaderboard-modal');
-const leaderboardList = document.getElementById('leaderboard-list');
-
-// Share Button Element
-const shareBtn = document.getElementById('share-btn');
-
 
 
 // --- Constants ---
-const LEADERBOARD_KEY = 'cryptoSnakeLeaderboard';
 
 // --- Donation Addresses ---
 const cryptoWallets = {
@@ -121,9 +111,6 @@ if (typeof window.Telegram !== 'undefined') {
         document.body.classList.add('telegram-light');
     }
     
-    // Show share button in Telegram
-    shareBtn.style.display = 'inline-block';
-    
     console.log('Telegram WebApp initialized');
 } else {
     console.log('Running outside Telegram - using default theme');
@@ -132,6 +119,16 @@ if (typeof window.Telegram !== 'undefined') {
 // --- Init and Game Loop ---
 document.addEventListener('DOMContentLoaded', () => {
     init();
+    // Ensure the canvas can receive keyboard focus in Telegram Desktop
+    try {
+        board.tabIndex = 0;
+        board.focus();
+    } catch (_) {}
+    // Focus the board on any pointer interaction to keep key events flowing
+    const focusBoard = () => { try { board.focus(); } catch (_) {} };
+    board.addEventListener('pointerdown', focusBoard);
+    board.addEventListener('click', focusBoard);
+    document.body.addEventListener('click', focusBoard, { once: true });
 });
 
 
@@ -144,7 +141,6 @@ function init() {
     changingDirection = false;
     scoreEl.textContent = 0;
     gameOverModal.style.display = 'none';
-    leaderboardModal.style.display = 'none';
     donateModal.style.display = 'none';
     qrcodeModal.style.display = 'none';
     generateFood();
@@ -257,7 +253,7 @@ document.addEventListener('keydown', e => {
     const isWASD = ["w", "a", "s", "d"].includes(key);
 
     if (!isWASD) return;
-    
+    e.preventDefault();
     changingDirection = true;
 
     switch (key) {
@@ -273,6 +269,21 @@ document.addEventListener('keydown', e => {
         case 'd':
             if (direction.x === 0) direction = { x: 1, y: 0 };
             break;
+    }
+});
+
+// Backup listener for Telegram Desktop environments where document might not receive events
+window.addEventListener('keydown', e => {
+    if (changingDirection) return;
+    const key = e.key.toLowerCase();
+    if (!['w','a','s','d'].includes(key)) return;
+    e.preventDefault();
+    changingDirection = true;
+    switch (key) {
+        case 'w': if (direction.y === 0) direction = { x: 0, y: -1 }; break;
+        case 's': if (direction.y === 0) direction = { x: 0, y: 1 }; break;
+        case 'a': if (direction.x === 0) direction = { x: -1, y: 0 }; break;
+        case 'd': if (direction.x === 0) direction = { x: 1, y: 0 }; break;
     }
 });
 
@@ -330,96 +341,13 @@ function handleSwipe(startX, startY, endX, endY) {
 // Event listener for the new restart button
 restartBtn.addEventListener('click', init);
 
-// Leaderboard
-leaderboardBtn.addEventListener('click', showLeaderboard);
-closeLeaderboardModal.addEventListener('click', () => leaderboardModal.style.display = 'none');
-submitScoreBtn.addEventListener('click', saveScore);
-
-// Share button
-shareBtn.addEventListener('click', async () => {
-    const gameUrl = 'https://t.me/CryptoSnakeMiniGameBot?game=CryptoSnakeMiniGame';
-    const shareText = `🐍 Play Crypto Snake - Classic Snake Game with Bitcoin TPS Speed Multiplier! 🎮\n\n${gameUrl}`;
-
-    // If inside Telegram, try to open a message composer to forward the link
-    if (Telegram && typeof Telegram.openTelegramLink === 'function') {
-        try {
-            Telegram.openTelegramLink(`https://t.me/share/url?url=${encodeURIComponent(gameUrl)}&text=${encodeURIComponent('Play Crypto Snake!')}`);
-            return;
-        } catch (_) {}
-    }
-
-    // Web Share API fallback
-    if (navigator.share) {
-        try {
-            await navigator.share({ title: 'Crypto Snake', text: 'Play Crypto Snake!', url: gameUrl });
-            return;
-        } catch (_) {}
-    }
-
-    // Clipboard fallback
-    try {
-        await navigator.clipboard.writeText(shareText);
-        alert('Link copied! Share it with your friends on Telegram.');
-    } catch (_) {
-        window.open(gameUrl, '_blank');
-    }
-});
-
-function showLeaderboard() {
-    const scores = JSON.parse(localStorage.getItem(LEADERBOARD_KEY)) || [];
-    
-    // Sort scores descending
-    scores.sort((a, b) => b.score - a.score);
-
-    leaderboardList.innerHTML = ''; // Clear previous list
-
-    if (scores.length === 0) {
-        leaderboardList.innerHTML = '<li>No scores yet. Be the first!</li>';
-    } else {
-        scores.slice(0, 10).forEach(score => { // Show top 10
-            const li = document.createElement('li');
-            const date = new Date(score.timestamp).toLocaleDateString();
-            li.innerHTML = `
-                <div>
-                    <span class="score-name">${score.name}</span>
-                    <span class="score-date">${date}</span>
-                </div>
-                <span class="score-points">${score.score} pts</span>
-            `;
-            leaderboardList.appendChild(li);
-        });
-    }
-
-    leaderboardModal.style.display = 'flex';
-}
-
-function saveScore() {
-    const playerName = playerNameInput.value.trim() || 'Anonymous';
-    const scores = JSON.parse(localStorage.getItem(LEADERBOARD_KEY)) || [];
-
-    const newScore = {
-        name: playerName,
-        score: score,
-        timestamp: new Date().toISOString()
-    };
-
-    scores.push(newScore);
-    localStorage.setItem(LEADERBOARD_KEY, JSON.stringify(scores));
-    
-    // Share score on Telegram if available
-    if (Telegram) {
-        const shareText = `🐍 Just scored ${score} points in Crypto Snake! 🎮\n\nPlay the game: https://t.me/CryptoSnakeMiniGameBot?game=CryptoSnake`;
-        Telegram.sendData(JSON.stringify({
-            type: 'share_score',
-            score: score,
-            text: shareText
-        }));
-    }
-    
-    // Clear input for next time and restart game
+// Submit now just restarts the game (no leaderboard/sharing)
+submitScoreBtn.addEventListener('click', () => {
     playerNameInput.value = '';
     init();
-}
+});
+
+// Share and leaderboard submission removed
 
 
 // Donations
