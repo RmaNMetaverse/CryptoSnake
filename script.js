@@ -33,6 +33,9 @@ const leaderboardModal = document.getElementById('leaderboard-modal');
 const closeLeaderboardModal = document.getElementById('close-leaderboard-modal');
 const leaderboardList = document.getElementById('leaderboard-list');
 
+// Share Button Element
+const shareBtn = document.getElementById('share-btn');
+
 
 
 // --- Constants ---
@@ -101,6 +104,30 @@ setInterval(() => {
     tpsEl.textContent = tps;
     speedMultiplierEl.textContent = `x${speedMultiplier.toFixed(2)}`;
 }, 1000);
+
+// --- Telegram WebApp Integration ---
+let Telegram;
+
+// Initialize Telegram WebApp
+if (typeof window.Telegram !== 'undefined') {
+    Telegram = window.Telegram.WebApp;
+    Telegram.ready();
+    Telegram.expand();
+    
+    // Set theme colors based on Telegram's theme
+    if (Telegram.colorScheme === 'dark') {
+        document.body.classList.add('telegram-dark');
+    } else {
+        document.body.classList.add('telegram-light');
+    }
+    
+    // Show share button in Telegram
+    shareBtn.style.display = 'inline-block';
+    
+    console.log('Telegram WebApp initialized');
+} else {
+    console.log('Running outside Telegram - using default theme');
+}
 
 // --- Init and Game Loop ---
 document.addEventListener('DOMContentLoaded', () => {
@@ -308,6 +335,17 @@ leaderboardBtn.addEventListener('click', showLeaderboard);
 closeLeaderboardModal.addEventListener('click', () => leaderboardModal.style.display = 'none');
 submitScoreBtn.addEventListener('click', saveScore);
 
+// Share button
+shareBtn.addEventListener('click', () => {
+    if (Telegram) {
+        const shareText = `🐍 Play Crypto Snake - Classic Snake Game with Bitcoin TPS Speed Multiplier! 🎮\n\nhttps://t.me/CryptoSnakeMiniGameBot?game=CryptoSnake`;
+        Telegram.sendData(JSON.stringify({
+            type: 'share_game',
+            text: shareText
+        }));
+    }
+});
+
 function showLeaderboard() {
     const scores = JSON.parse(localStorage.getItem(LEADERBOARD_KEY)) || [];
     
@@ -348,6 +386,16 @@ function saveScore() {
 
     scores.push(newScore);
     localStorage.setItem(LEADERBOARD_KEY, JSON.stringify(scores));
+    
+    // Share score on Telegram if available
+    if (Telegram) {
+        const shareText = `🐍 Just scored ${score} points in Crypto Snake! 🎮\n\nPlay the game: https://t.me/CryptoSnakeMiniGameBot?game=CryptoSnake`;
+        Telegram.sendData(JSON.stringify({
+            type: 'share_score',
+            score: score,
+            text: shareText
+        }));
+    }
     
     // Clear input for next time and restart game
     playerNameInput.value = '';
