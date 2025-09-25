@@ -42,7 +42,7 @@ const cryptoWallets = {
 // --- Game Settings ---
 const tileSize = 20;
 const boardSize = board.width / tileSize;
-const baseSpeed = 1.3; // Base ticks per second
+const baseSpeed = 1.6; // Base ticks per second, increased from 1.3
 
 // --- Game State ---
 let snake, food, direction, score, gameOver, gameLoopTimeout, changingDirection;
@@ -86,10 +86,15 @@ setInterval(() => {
     tps = transactionCount;
     transactionCount = 0;
     
-    // Ensure speed multiplier is at least 1
-    speedMultiplier = Math.max(1, tps / 2); // Divide by 2 to make it less extreme
+    // Cap the effective TPS to a realistic maximum of 7
+    const effectiveTps = Math.min(tps, 7);
     
-    tpsEl.textContent = tps;
+    // The speed multiplier is now based on the capped TPS, ensuring it also has a max of 7.
+    // We use Math.max(1, ...) to ensure the speed never drops below the base speed.
+    speedMultiplier = Math.max(1, effectiveTps);
+    
+    // Update the UI with the capped (more realistic) values
+    tpsEl.textContent = effectiveTps;
     speedMultiplierEl.textContent = `x${speedMultiplier.toFixed(2)}`;
 }, 1000);
 
@@ -248,7 +253,7 @@ document.addEventListener('keydown', e => {
     if (changingDirection) return;
 
     const key = e.key.toLowerCase();
-    const isWASD = ["w", "a", "s", "d"].includes(key);
+    const isWASD = ["w", "a", "s", "d", "arrowup", "arrowdown", "arrowleft", "arrowright"].includes(key);
 
     if (!isWASD) return;
     e.preventDefault();
@@ -256,32 +261,21 @@ document.addEventListener('keydown', e => {
 
     switch (key) {
         case 'w':
+        case 'arrowup':
             if (direction.y === 0) direction = { x: 0, y: -1 };
             break;
         case 's':
+        case 'arrowdown':
             if (direction.y === 0) direction = { x: 0, y: 1 };
             break;
         case 'a':
+        case 'arrowleft':
             if (direction.x === 0) direction = { x: -1, y: 0 };
             break;
         case 'd':
+        case 'arrowright':
             if (direction.x === 0) direction = { x: 1, y: 0 };
             break;
-    }
-});
-
-// Backup listener for Telegram Desktop environments where document might not receive events
-window.addEventListener('keydown', e => {
-    if (changingDirection) return;
-    const key = e.key.toLowerCase();
-    if (!['w','a','s','d'].includes(key)) return;
-    e.preventDefault();
-    changingDirection = true;
-    switch (key) {
-        case 'w': if (direction.y === 0) direction = { x: 0, y: -1 }; break;
-        case 's': if (direction.y === 0) direction = { x: 0, y: 1 }; break;
-        case 'a': if (direction.x === 0) direction = { x: -1, y: 0 }; break;
-        case 'd': if (direction.x === 0) direction = { x: 1, y: 0 }; break;
     }
 });
 
@@ -335,13 +329,8 @@ function handleSwipe(startX, startY, endX, endY) {
 
 // --- UI / Modal Logic ---
 
-
-
-
 // Event listener for the new restart button
 restartBtn.addEventListener('click', init);
-
-
 
 // Donations
 donateBtn.addEventListener('click', () => donateModal.style.display = 'flex');
@@ -420,4 +409,3 @@ function showQrCode(name, address) {
         qrcodeModal.style.display = 'flex';
     }
 }
-
