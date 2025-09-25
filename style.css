@@ -256,39 +256,6 @@ h1 {
     box-sizing: border-box; /* Important for padding */
 }
 
-/* --- Leaderboard Modal --- */
-#leaderboard-list {
-    list-style-type: decimal;
-    padding-left: 30px;
-    color: #c9d1d9;
-    max-height: 300px;
-    overflow-y: auto;
-}
-
-#leaderboard-list li {
-    padding: 8px 0;
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid #30363d;
-}
-
-#leaderboard-list li:last-child {
-    border-bottom: none;
-}
-
-#leaderboard-list .score-name {
-    font-weight: bold;
-}
-
-#leaderboard-list .score-points {
-    color: #58a6ff;
-}
-
-#leaderboard-list .score-date {
-    font-size: 0.8rem;
-    color: #8b949e;
-    display: block;
-}
 
 
 /* --- Donate Modal --- */
@@ -367,22 +334,7 @@ h1 {
 }
 
 /* --- Game Over Modal --- */
-#submit-score-btn {
-    width: 100%;
-    padding: 12px;
-    margin-top: 10px;
-    background-color: #238636;
-    color: white;
-    border: 1px solid #2ea043;
-    border-radius: 6px;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
 
-#submit-score-btn:hover {
-    background-color: #2ea043;
-}
 
 /* New single restart button styling */
 .modal-button-group.single {
@@ -413,7 +365,7 @@ h1 {
 }
 
 /* Donate title red */
-.donate-title {
+.donate-title , .gameover-title {
     color: #e55353;
 }
 
