@@ -14,7 +14,7 @@ A classic snake game with a volatile crypto twist\! The snake's speed is directl
 
 ## **🚀 How to Play**
 
-1. **Visit the game link:** [Web Version](https://rmanmetaverse.github.io/CryptoSnake/) [Telegram minigame (type /play in the bot to start)](@CryptoSnakeMiniGameBot)
+1. **Visit the game link:** [Web Version](https://rmanmetaverse.github.io/CryptoSnake/) || [Telegram minigame (type /play in the bot to start)](@CryptoSnakeMiniGameBot)
 2. Use the **Arrow Keys or WASD keys on 💻** or **Swipe Touch** on your Touchscreen to make the first move.  
 3. Eat the Bitcoin (**₿**) symbols to grow your snake and increase your score.  
 4. Avoid running into the walls or your own tail.  
